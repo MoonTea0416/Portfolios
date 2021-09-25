@@ -1,0 +1,253 @@
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image:url(background.png);
+    background-size: 100%;
+    background-position: center top;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ 
+.container img{
+  border-radius: 50%;
+  border: 2px solid white;
+  width: 100px;
+  height: 100px;
+  animation: avatar 1s, avatarMove 1s;
+  animation-delay: 0s, 1s;
+  animation-fill-mode: forwards;
+   
+}
+
+.container span{
+    font-size: 80px;
+    color:rgb(83, 70, 119);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: absolute;
+    /*left: calc(50% - 100px);*/
+    visibility: hidden;
+    animation: showTitle 1s;
+    animation-delay: 1.5s;
+    animation-fill-mode: forwards;
+   
+}
+
+
+.box{
+    position:relative;
+    font-size: 30px;
+    color:rgb(253, 252, 201);
+    top:150px;
+    left:-70px;
+    font-family: Arial, Helvetica, sans-serif;
+    animation: showTitle 2.5s linear infinite;  
+}
+
+
+.modal-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal-container.show-modal {
+  display: block;
+}
+
+.modal {
+  background-color:  rgb(255, 255, 255);
+  opacity: 0.65;
+  border-radius: 50px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  width: 400px;
+  height: 450px;
+  text-align:center;
+  animation-name: modalopen;
+  animation-duration: var(--modal-duration);
+}
+
+.modal-header {
+  background: var(--primary-color);
+  text-align:center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  top: 40px;
+  color: rgb(92, 121, 97);
+}
+.id{
+    margin-top: 25%;	 
+		border: 0px; 
+		border-radius: 25px; 
+		width: 180px;
+		height: 70px;
+    background-color: rgb(80, 117, 99);
+    color:white;
+		cursor: pointer;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 120%;
+}
+.close-btn {
+  background-color: rgb(79, 117, 114);
+  font-size: 25px;
+  position: relative;
+  left:40%;
+  top: 0;
+  right: 0;
+}
+
+
+.login-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.login-container.show-table {
+  display: block;
+}
+
+.login {
+  background-color: rgb(243, 237, 232);
+  opacity: 0.8;
+  border-radius: 50px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  width: 400px;
+  height: 450px;
+  text-align:center;
+  animation-name: modalopen;
+  animation-duration: var(--modal-duration);
+}
+
+.login-content {
+  padding: 25px;
+}
+.login-form{
+  text-align:center;
+}
+.login-form div {
+  margin-top: 15%;
+  border-radius: 10px;
+  background-color: rgb(79, 117, 114);
+  color:rgb(248, 248, 247);
+  cursor: pointer;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 120%;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.login-form .form-input {
+  border-radius: 10px;
+  border-color:  rgb(79, 117, 114);;
+  padding: 12px;
+  width: 91.5%;
+}
+
+
+.login-form button{
+  cursor: pointer;
+  display: inline-block;
+  background-color: rgb(79, 117, 114);;
+  border: 2px solid  rgb(79, 117, 114);;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  margin-top: 50px;
+  width: 100px;
+  height: 40px;
+}
+
+/*flash*/
+@keyframes avatar{
+    0%{
+      transform: scale(0,0) rotate(0deg);
+    }
+    50%{
+      transform: scale(1,1) rotate(180deg);
+    }
+    70%{
+      transform: scale(0.7,0.7) rotate(270deg);
+    }
+    100%{
+      transform: scale(1,1) rotate(-360deg);
+    }
+}
+@keyframes avatarMove{
+    0%{
+      transform: translate(0,0);
+    }
+    100%{
+      transform: translate(-200px,0);
+    }
+}
+@keyframes showTitle{
+    0%{
+      opacity: 0;
+      visibility:visible; 
+    }
+    20%{
+      opacity: 0.2;
+      visibility:visible;
+       
+    }
+    40%{
+      opacity: 0.4;
+      visibility:visible;
+       
+    }
+    60%{
+      opacity: 0.6;
+      visibility:visible; 
+    }
+    80%{
+      opacity: 0.8;
+      visibility: visible;
+    }
+    100%{
+      opacity: 1;
+      visibility: visible;
+    }
+}
+
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
