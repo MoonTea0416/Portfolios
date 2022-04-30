@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+
+<!-- WEB SERVER META DATA -->
+<webserver
+    title="Another Excellent Webserver"
+    date="October 2020"
+    author="Oh Am I"
+>
+
+<!-- DEFAULT DOCUMENTS -->
+<context defaultDocument = "C:\\web-server\\site\\index.html"></context> 
+
+<!-- DOCUMENT ROOT -->
+<!-- Windows style -->
+<context documentRoot = "C:\\web-server\\site\\"></context>
+
+<!-- LOG FILE -->
+<!--Windows style-->
+<logfile log = "./logs/log.txt"></logfile> 
+
+<!-- 404 FILE -->
+<context fourohfour = "C:\\web-server\\site\\404.html"></context> 
+
+</webserver>
