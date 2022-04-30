@@ -1,24 +1,6 @@
-# README
+# Naming your Life
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The goal of this project is to create a virtual community where users only focus on a specific topic: naming. A single well-developed application encourages users to share their stories through social platforms. The ability to add context to a post, event or captured moment in time allows users to better share their lives, receiving immediate feedback that encourages a more accessible and genuine connection. The web project will strive to develop a new social paradigm for sharing people's lives in a user-friendly, straightforward way, using Ruby on Rails as the full-stack framework.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Naming your Life is a big jump for me. It continuously gives me new thoughts about web app design and it deepen my understanding the concepts and techniques of object-oriented software design. I have two main goals for this project. The first is that I want to have some system study of Ruby on Rails development, knowing better about the framework. The second one is I want to improve my frontend skill to build up a user-friendly interface. I have faced lots of obstcle when develop a web only by myself, working both on the frontend and the backend. Testing, finding and finally solving problems were such a valuable experience during the project. Naming your Life is an ambitious project that I think achieved these two goals. It brought me even more development experience and improvement.
+ 
