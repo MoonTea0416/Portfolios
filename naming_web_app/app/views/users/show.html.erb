@@ -1,0 +1,198 @@
+<div id="avatar-modal" class="modal">
+  <div id="avatar-modal-background" class="modal-background"></div>
+  <div class="modal-content avatar-edit-form">
+    <h1 class="title is-3">Update</h1>
+
+    <%= simple_form_for @user, url: update_avatar_path do |f| %>
+      <div class="update-image">
+        <%= render partial: 'user_image', locals: { user: current_user } %>
+      </div>
+      <div id="image-upload-js-3" class="file has-name">
+        <label class="file-label">
+          <%= f.file_field :avatar, class: 'file-input' %>
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fa fa-image"></i>
+            </span>
+            <span class="file-name has-text-grey-light">
+              select new avatar
+            </span>
+          </span>
+        </label>
+      </div>
+      <%= f.button :submit, 'Update Avatar', class: 'button is-base' %>
+    <% end %>
+  </div>
+  <button id="avatar-modal-close" class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<div id="cover-modal" class="modal">
+  <div id="cover-modal-background" class="modal-background"></div>
+  <div class="modal-content cover-edit-form">
+    <h1 class="title is-3">Update Cover Picture</h1>
+
+    <%= simple_form_for @user, url: update_cover_path do |f| %>
+      <div class="cover-picture">
+        <% if @user.cover_picture.attached?  %>
+          <%= image_tag @user.cover_picture, class: 'cover-image' %>
+        <% else %>
+          <%= image_tag 'https://images.freecreatives.com/wp-content/uploads/2017/01/m.jpg', class: 'cover-image' %>
+        <% end %>
+      </div>
+      <div id="image-upload-js-4" class="file has-name">
+        <label class="file-label">
+          <%= f.file_field :cover_picture, class: 'file-input' %>
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fa fa-image"></i>
+            </span>
+            <span class="file-name has-text-grey-light">
+              select new cover
+            </span>
+          </span>
+        </label>
+      </div>
+      <%= f.button :submit, 'Update Cover', class: 'button is-base' %>
+    <% end %>
+  </div>
+  <button id="cover-modal-close" class="modal-close is-large" aria-label="close"></button>
+</div>
+<div class= "column is-four-fifths">
+  <div class='user-info-container'>
+    <div class="cover-picture">
+      <% if @user.cover_picture.attached?  %>
+        <%= image_tag @user.cover_picture, class: 'cover-image' %>
+      <% else %>
+        <%= image_tag 'https://images.unsplash.com/photo-1458682625221-3a45f8a844c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80', class: 'cover-image' %>
+      <% end %>
+      <% if current_user == @user %>
+        <span id='show-cover-modal' class="image-link cover-button">Change Cover</span>
+      <% end %>
+    </div>
+    <div class="profile-show-container">
+      <div class="avatar">
+        <%= render partial: 'user_image', locals: { user: @user } %>
+        <% if current_user == @user %>
+          <span id='show-avatar-modal' class="image-link">Edit</span>
+        <% end %>
+      </div>
+      <div class="user-info">
+       <span class="username">@<%= @user.username %></span>
+        <% if current_user == @user %>
+          <div class="friend-status">
+            <div class="friend-request-action">
+              <%= link_to "Edit Profile", edit_user_registration_path, class: 'button is-small is-link' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns is-centered">
+    <div class="timeline-container column is-four-fifths">
+      <div class="columns">
+        <div class="column <%= 'is-two-fifths' if @user == current_user %>">
+          <div class="box profile-intro">
+            <h1 class="title is-2"><i class="fas fa-globe-americas"></i> Intro</h1>
+              <p><i class="fas fa-book"></i> <%= @user.bio %></p>
+          </div>
+        </div>
+        <% if user_signed_in? && @user == current_user %>
+          <div class="column is-three-fifths">
+            <div class="post-form">
+              <%= simple_form_for @post do |f| %>
+                <%= f.text_area :text, label: 'name', placeholder: 'what\'s in your mind?', class:"textarea post-area" %>
+                <div id="image-upload-js" class="file has-name">
+                  <label class="file-label">
+                    <%= f.file_field :image, class: 'file-input' %>
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fa fa-image"></i>
+                      </span>
+                      <span class="file-name has-text-grey-light">
+                        No file uploaded
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <%= f.button :submit, 'Post' ,class: 'button is-medium btn-base' %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="posts-container">
+        <% if @posts.empty? %>
+          <p class="note">There is no posts, availble here.</p>
+        <% end %>
+        <% @posts.each do |post| %>
+          <div id="post-<%= post.id %>" class="box">
+            <div class="poster-identifier">
+              <div class="poster-info">
+                <%= link_to user_path(@user) do %>
+                  <div class="image-wrapper">
+                    <%= render partial: 'user_image', locals: { user: @user } %>
+                  </div>
+                <% end %>
+                <div class="post-data">
+                  <%= link_to user_path(@user), class: "has-text-black underline" do %>
+                    <span class="name"><%= @user.username %></span>
+                  <% end %>
+                  <span class="username">@<%= @user.username %></span>
+                  <span class="date">
+                    <%= time_ago_in_words(post.created_at) %>
+                  </span>
+                </div>
+              </div>
+              <% if current_user == post.user %>
+                <div class="post-actions">
+                  <div class="dropdown">
+                    <div class="dropdown-trigger">
+                      <a class="post-action-container"><i class="fas fa-ellipsis-v"></i></a>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                      <div class="dropdown-content post-action-menu">
+                      <%= link_to  "Edit", edit_post_path(post), class: "dropdown-item" %>
+                      <%= link_to  "Delete", post_path(post), method: :delete, class: "dropdown-item" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="post-text">
+              <%= post.text %>
+            </div>
+
+            <% if post.image.attached? %>
+              <div class="post-image">
+                <%= image_tag post.image %>
+              </div>
+            <% end %>
+
+            <div class="comments-container">
+              <% post.comments.each do |comment| %>
+                <%= render partial: 'comments/comment', locals: { post: post, comment: comment } %>
+              <% end %>
+            </div>
+
+            <% if user_signed_in? %>
+              <div class="comment-form">
+                <div class="comment-avatar">
+                  <%= render partial: 'user_image', locals: { user: current_user } %>
+                </div>
+                <%= simple_form_for current_user.comments.new, url: post_comments_path(post) do |f| %>
+                  <%= f.text_area :text, placeholder: 'what\'s in your mind?', class: "textarea"%>
+                  <%= f.button :submit, 'Comment', class: 'button is-success is-small' %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

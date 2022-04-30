@@ -1,0 +1,9 @@
+<% if user %>
+  <% if user.avatar.attached? %>
+    <%= image_tag user.avatar, class: 'profile-image'%>
+  <% else %>
+      <%= image_tag "https://api.multiavatar.com/#{user.username}.png", class: 'profile-image' %>
+  <% end %>
+<% else %>
+  <%= image_tag 'https://img2.thejournal.ie/inline/1881369/original/?width=630&version=1881369', class: 'profile-image' %>
+<% end %>

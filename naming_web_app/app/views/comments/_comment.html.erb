@@ -1,0 +1,39 @@
+<div class="comment-container">
+  <div class="comment">
+    <div class="user-avatar">
+      <%= link_to user_path(comment.user) do %>
+        <%= render partial: 'user_image', locals: { user: comment.user } %>
+      <% end %>
+    </div>
+    <div class="comment-body">
+      <div class="flex">
+        <span class='user-name'><%= comment.user.username %></span>
+        <%= comment.text %>
+      </div>
+      <div class="vote-container">
+          <% if user_signed_in? %>
+            <div class="supports">
+              <span class="<% if comment.supported(current_user) %><%= 'has-text-base' %><% end %>"><%= comment.supports %></span>
+              <%= link_to post_comment_support_action_path(:comment_id => comment.id, :post_id => comment.post.id), method: :post do %>
+              <i class="fas fa-thumbs-up <% if comment.supported(current_user) %><%= 'has-text-base' %><% end %>"></i>
+              <% end %>
+            </div>
+                    
+            <div class="nonsupports">
+              <span class="<% if comment.nonsupported(current_user) %><%= 'has-text-base' %><% end %>"><%= comment.nonsupports %></span>
+
+              <%= link_to post_comment_nonsupport_action_path(:comment_id => comment.id, :post_id => comment.post.id), method: :post do %>
+              <i class="fas fa-thumbs-down <% if comment.nonsupported(current_user) %><%= 'has-text-base' %><% end %>"></i> 
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+    </div>
+  </div>
+  <div class="comment-action">
+    <% if comment.user == current_user %>
+      <%= link_to  '<i class="fa fa-trash"></i>'.html_safe, post_comment_path(post ,comment), method: :delete %>
+    <% end %>
+    <span class="comment-date"><%= time_ago_in_words(comment.created_at) %>, ago</span>
+  </div>
+</div>

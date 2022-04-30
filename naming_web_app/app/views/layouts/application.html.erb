@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NamingApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id="user-id" data-user-id="<%= current_user.try(:id) %>"></div>
+    <% if current_user %>
+      <div id='user-avatar' hidden='true'>
+        <%= render partial: 'user_image', locals: { user: current_user } %>
+      </div>
+    <% end %>
+      <nav class="nav-bar md-display-none">
+        <div class="nav-bar-content">
+          <div class="logo-container" href="/">
+            <a class="logo-text"  href="/" style="color:rgb(104, 69, 160);font-size:25px;font-family:Stencil Std, fantasy ">
+              Naming Your Life
+            </a>
+          </div>
+        </div>
+        <div class="shrink-non">
+          <% if user_signed_in? %>
+            <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to 'Sign In', user_session_path, class: "sign-link" %>
+            <%= link_to 'Sign Up', new_user_registration_path, class: "sign-link" %>
+          <% end %>
+        </div>
+      </nav>
+    <main class="main-container">
+      <%= yield %>
+    </main>
+  </body>
+</html>
+

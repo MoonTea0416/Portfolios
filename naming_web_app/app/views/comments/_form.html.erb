@@ -1,0 +1,9 @@
+<div class="comment-form">
+  <div class="comment-avatar">
+    <%= render partial: 'user_image', locals: { user: current_user } %>
+  </div>
+  <%= simple_form_for current_user.comments.new, url: post_comments_path(post) do |f| %>
+    <%= f.input_field :text, placeholder: 'Any excellent idea of naming?', class: "textarea"%>
+    <%= f.button :submit, 'Comment', class: 'button is-success is-small' %>
+  <% end %>
+</div>
