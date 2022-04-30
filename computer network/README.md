@@ -18,5 +18,5 @@ consisting of the requested data; finaly send the response to the client.
   * Homework 5 is about to build up a simple website. It's similar to homwwork 2 but it will return the local resource.
 
   * Homework 6 is about build a chat server with server and client. And server can services each request in a separate thread.
- 
 
+This class brought me a system level understanding of the computer network, become familiar with layered communication architecturer.  
